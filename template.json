@@ -1,4 +1,8 @@
 {
+  "push": {
+    "name": "pxfs/freebsd",
+    "vcs": true
+  },
   "builders": [
     {
       "type": "virtualbox-iso",
@@ -122,6 +126,26 @@
         "virtualbox": {
           "vagrantfile_template": "./Vagrantfile.virtualbox"
         }
+      }
+    },
+    {
+      "type": "atlas",
+      "only": ["vmware-iso"],
+      "artifact": "pxfs/freebsd-10.1",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "vmware_desktop",
+        "version": "0.0.1"
+      }
+    },
+    {
+      "type": "atlas",
+      "only": ["virtualbox-iso"],
+      "artifact": "pxfs/freebsd-10.1",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "virtualbox",
+        "version": "0.0.1"
       }
     }
   ]
