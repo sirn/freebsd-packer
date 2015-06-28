@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo 'Disabling sshd...'
+service sshd stop
+
 echo 'Installing FreeBSD with ZFS root...'
 mount_cd9660 /dev/cd0 /cdrom
 zfsinstall -d da0 -s 2G -u /cdrom/10.1-RELEASE-amd64

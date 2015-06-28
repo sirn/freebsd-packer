@@ -9,8 +9,8 @@
       "boot_command": [
         "root<enter><wait>",
         "mfsroot<enter><wait>",
-        "fetch http://{{.HTTPIP}}:{{.HTTPPort}}/bootstrap.sh<enter><wait10>",
-        "sh bootstrap.sh<enter>"
+        "fetch http://{{.HTTPIP}}:{{.HTTPPort}}/bootstrap.sh<enter><wait5>",
+        "sh bootstrap.sh<enter><wait10>"
       ],
       "boot_wait": "30s",
       "disk_size": 20480,
@@ -34,8 +34,8 @@
       "boot_command": [
         "root<enter><wait>",
         "mfsroot<enter><wait>",
-        "fetch http://{{.HTTPIP}}:{{.HTTPPort}}/bootstrap.sh<enter><wait10>",
-        "sh bootstrap.sh<enter>"
+        "fetch http://{{.HTTPIP}}:{{.HTTPPort}}/bootstrap.sh<enter><wait5>",
+        "sh bootstrap.sh<enter><wait10>"
       ],
       "boot_wait": "30s",
       "disk_size": 20480,
