@@ -5,8 +5,9 @@ This repository provides a Packer template for building FreeBSD image with ZFS r
 
 ### Prerequisites
 
-* [Vagrant](https://www.vagrantup.com/) with [VMware Provider](https://www.vagrantup.com/vmware).
-* [Packer](https://www.packer.io/).
+* [Vagrant](https://www.vagrantup.com/)
+* [Packer](https://www.packer.io/)
+* [VMware Provider](https://www.vagrantup.com/vmware) (optional)
 
 ### Usage
 
