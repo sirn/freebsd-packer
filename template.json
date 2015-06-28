@@ -41,7 +41,6 @@
       ],
       "boot_wait": "30s",
       "disk_size": 20480,
-      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "guest_os_type": "FreeBSD_64",
       "headless": true,
       "iso_checksum": "56d1b62a05e3f626bee856efab39c971b8885873e0a8484f9870aa0363575fce",
@@ -98,8 +97,8 @@
       "iso_checksum": "56d1b62a05e3f626bee856efab39c971b8885873e0a8484f9870aa0363575fce",
       "iso_checksum_type": "sha256",
       "iso_url": "http://mfsbsd.vx.sk/files/iso/10/amd64/mfsbsd-se-10.1-RELEASE-amd64.iso",
-      "skip_compaction": true,
       "shutdown_command": "poweroff; poweroff",
+      "skip_compaction": true,
       "ssh_password": "vagrant",
       "ssh_username": "root",
       "ssh_wait_timeout": "30s",
@@ -111,7 +110,7 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "setup.sh"
+      "script": "scripts/setup.sh"
     }
   ],
   "post-processors": [
@@ -121,10 +120,10 @@
       "keep_input_artifact": false,
       "override": {
         "vmware": {
-          "vagrantfile_template": "./Vagrantfile.vmware"
+          "vagrantfile_template": "files/Vagrantfile.vmware"
         },
         "virtualbox": {
-          "vagrantfile_template": "./Vagrantfile.virtualbox"
+          "vagrantfile_template": "files/Vagrantfile.virtualbox"
         }
       }
     },
