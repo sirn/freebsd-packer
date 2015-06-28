@@ -1,0 +1,13 @@
+# -*- mode: ruby -*-
+Vagrant.configure("2") do |config|
+  config.vm.guest = :freebsd
+  config.vm.box = "freebsd-10.1"
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
+  config.ssh.shell = "tcsh"
+
+  config.vm.provider :vmware_fusion do |v|
+    v.vmx["memsize"] = "1024"
+    v.vmx["numvcpus"] = "1"
+    v.vmx["ide1:0.present"] = "FALSE"
+  end
+end

@@ -1,0 +1,72 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "root<enter><wait>",
+        "mfsroot<enter><wait>",
+
+        "mount_cd9660 /dev/cd0 /cdrom<enter><wait>",
+        "<wait5>",
+
+        "zfsinstall -d da0 -s 2G -u /cdrom/10.1-RELEASE-amd64<enter><wait>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+
+        "chroot /mnt<enter><wait>",
+        "sed -i '' -e 's/#PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config<enter><wait>",
+        "sed -i '' -e 's/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config<enter><wait>",
+        "chsh -s sh root<enter><wait>",
+        "passwd<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "sysrc hostname=vagrant<enter><wait>",
+        "sysrc ifconfig_em0=DHCP<enter><wait>",
+        "sysrc sshd_enable=YES<enter><wait>",
+        "exit<enter><wait>",
+
+        "reboot<enter><wait>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>",
+        "<wait10>"
+      ],
+      "boot_wait": "30s",
+      "disk_size": 20480,
+      "guest_os_type": "freebsd-64",
+      "headless": true,
+      "iso_checksum": "56d1b62a05e3f626bee856efab39c971b8885873e0a8484f9870aa0363575fce",
+      "iso_checksum_type": "sha256",
+      "iso_url": "http://mfsbsd.vx.sk/files/iso/10/amd64/mfsbsd-se-10.1-RELEASE-amd64.iso",
+      "shutdown_command": "poweroff; poweroff",
+      "ssh_password": "vagrant",
+      "ssh_username": "root",
+      "ssh_wait_timeout": "30s",
+      "type": "vmware-iso",
+      "vmx_data": {
+        "memsize": "1024"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "setup.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "output": "freebsd-10.1-{{.Provider}}.box",
+      "type": "vagrant",
+      "keep_input_artifact": false,
+      "override": {
+        "vmware": {
+          "vagrantfile_template": "./Vagrantfile.vmware"
+        }
+      }
+    }
+  ]
+}
