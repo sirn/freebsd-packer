@@ -17,7 +17,7 @@
       "shutdown_command": "poweroff; poweroff",
       "ssh_password": "mfsroot",
       "ssh_username": "root",
-      "ssh_wait_timeout": "30s",
+      "ssh_wait_timeout": "120s",
       "virtualbox_version_file": ".vbox_version",
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--memory", "1024"]
@@ -36,7 +36,7 @@
       "skip_compaction": true,
       "ssh_password": "mfsroot",
       "ssh_username": "root",
-      "ssh_wait_timeout": "30s",
+      "ssh_wait_timeout": "120s",
       "vmx_data": {
         "memsize": "1024"
       }
@@ -55,38 +55,40 @@
     }
   ],
   "post-processors": [
-    {
-      "output": "freebsd-10.1-{{.Provider}}.box",
-      "type": "vagrant",
-      "keep_input_artifact": false,
-      "override": {
-        "vmware": {
-          "vagrantfile_template": "files/Vagrantfile.vmware"
-        },
-        "virtualbox": {
-          "vagrantfile_template": "files/Vagrantfile.virtualbox"
+    [
+      {
+        "output": "freebsd-10.1-{{.Provider}}.box",
+        "type": "vagrant",
+        "keep_input_artifact": false,
+        "override": {
+          "vmware": {
+            "vagrantfile_template": "files/Vagrantfile.vmware"
+          },
+          "virtualbox": {
+            "vagrantfile_template": "files/Vagrantfile.virtualbox"
+          }
+        }
+      },
+      {
+        "type": "atlas",
+        "only": ["vmware-iso"],
+        "artifact": "pxfs/freebsd-10.1",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+          "provider": "vmware_desktop",
+          "version": "0.0.2"
+        }
+      },
+      {
+        "type": "atlas",
+        "only": ["virtualbox-iso"],
+        "artifact": "pxfs/freebsd-10.1",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+          "provider": "virtualbox",
+          "version": "0.0.2"
         }
       }
-    },
-    {
-      "type": "atlas",
-      "only": ["vmware-iso"],
-      "artifact": "pxfs/freebsd-10.1",
-      "artifact_type": "vagrant.box",
-      "metadata": {
-        "provider": "vmware_desktop",
-        "version": "0.0.1"
-      }
-    },
-    {
-      "type": "atlas",
-      "only": ["virtualbox-iso"],
-      "artifact": "pxfs/freebsd-10.1",
-      "artifact_type": "vagrant.box",
-      "metadata": {
-        "provider": "virtualbox",
-        "version": "0.0.1"
-      }
-    }
+    ]
   ]
 }
