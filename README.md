@@ -1,15 +1,33 @@
-mfsBSD Packer Template
-======================
+FreeBSD Packer Template
+=======================
 
-This repository provides a Packer template for building FreeBSD image with ZFS root. The repository is based on [brd/packer-freebsd](https://github.com/brd/packer-freebsd) but use [mfsBSD](http://mfsbsd.vx.sk/) to bootstrap the installation instead of FreeBSD ISO.
+This repository provides a Packer template for building FreeBSD image with ZFS root. The repository is based on [brd/packer-freebsd](https://github.com/brd/packer-freebsd) but use [mfsBSD](http://mfsbsd.vx.sk/) to bootstrap the installation over SSH instead of using boot command with FreeBSD ISO.
 
-### Prerequisites
+## Usage
+
+This repository is built with Atlas. The resulting image will be pushed to [pxfs/freebsd-10.1](https://vagrantcloud.com/pxfs/boxes/freebsd-10.1) automatically. You can init Vagrant environment with the image built from this repository with:
+
+```shell
+$ vagrant init pxfs/freebsd-10.1
+```
+
+Or configure manually,
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "pxfs/freebsd-10.1"
+  # Other configuration.
+end
+```
+
+## Manually Building
 
 * [Vagrant](https://www.vagrantup.com/)
 * [Packer](https://www.packer.io/)
-* [VMware Provider](https://www.vagrantup.com/vmware) (optional)
+* [VirtualBox](https://www.virtualbox.org/) (for VirtualBox image)
+* [VMware Provider](https://www.vagrantup.com/vmware) (for VMware image)
 
-### Usage
+### Building
 
 1. Build the Vagrant box with `packer build template.json`.
 2. Add the Vagrant box with `vagrant box add --name freebsd-10.1 freebsd-10.1-vmware.box`.
