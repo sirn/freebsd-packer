@@ -1,12 +1,25 @@
 #!/bin/sh
 
-echo 'Setting up pkg...'
+echo '==> Make network accessible...'
+echo 'nameserver 8.8.8.8' > /etc/resolv.conf
+echo 'nameserver 8.8.4.4' >> /etc/resolv.conf
+
+echo '==> Configuring system...'
+sysrc hostname=vagrant
+sysrc ifconfig_em0=DHCP
+
+echo '==> Configuring SSH...'
+sysrc sshd_enable=YES
+sed -i '' -e 's/#PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config
+sed -i '' -e 's/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
+
+echo '==> Setting up pkg...'
 if [ ! -f /usr/local/sbin/pkg ]; then
-    ASSUME_ALWAYS_YES=yes pkg bootstrap
+    env ASSUME_ALWAYS_YES=yes pkg bootstrap
 fi
 
 if [ "$PACKER_BUILDER_TYPE" = 'vmware-iso' ]; then
-    echo 'Setting up VMware tools...'
+    echo '==> Setting up VMware tools...'
     pkg install -y open-vm-tools-nox11
     echo 'vmware_guest_vmblock_enable="YES"' >> /etc/rc.conf
     echo 'vmware_guest_vmhgfs_enable="YES"' >> /etc/rc.conf
@@ -14,16 +27,17 @@ if [ "$PACKER_BUILDER_TYPE" = 'vmware-iso' ]; then
     echo 'vmware_guest_vmxnet_enable="YES"' >> /etc/rc.conf
 	echo 'vmware_guestd_enable="YES"' >> /etc/rc.conf
 elif [ "$PACKER_BUILDER_TYPE" = 'virtualbox-iso' ]; then
-    echo 'Setting up VirtualBox tools...'
+    echo '==> Setting up VirtualBox tools...'
     pkg install -y virtualbox-ose-additions
     echo 'ifconfig_em1="inet 10.6.66.42 netmask 255.255.255.0"' >> /etc/rc.conf
     echo 'vboxguest_enable="YES"' >> /etc/rc.conf
     echo 'vboxservice_enable="YES"' >> /etc/rc.conf
 else
-    echo 'Unknown type of VM, skipping tools installation.'
+    echo '==> Unknown type of VM, skipping tools installation.'
 fi
 
-echo 'Setting up vagrant user...'
+echo '==> Setting up user...'
+sh -c "echo vagrant |pw mod user root -h 0"
 pw user add vagrant -m -G wheel
 mkdir ~vagrant/.ssh
 chmod 700 ~vagrant/.ssh
@@ -31,11 +45,11 @@ echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4
 chown -R vagrant ~vagrant/.ssh
 chmod 600 ~vagrant/.ssh/authorized_keys
 
-echo 'Setting up sudo..'
+echo '==> Setting up sudo..'
 pkg install -y sudo
 echo 'vagrant ALL=(ALL) NOPASSWD: ALL' > /usr/local/etc/sudoers.d/vagrant
 
-echo 'Finalizaing...'
-chsh -s tcsh root
+echo '==> Finalizing...'
+rm /etc/resolv.conf
 
-echo 'Done.'
+echo '==> Done.'
