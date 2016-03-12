@@ -1,7 +1,7 @@
 # -*- mode: ruby; -*-
 Vagrant.configure("2") do |config|
   config.vm.guest = :freebsd
-  config.vm.box = "pxfs/freebsd-10.1"
+  config.vm.box = "pxfs/freebsd-10.2"
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.network "private_network", ip: "1.0.0.2"
   config.ssh.shell = "tcsh"
