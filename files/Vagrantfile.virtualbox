@@ -4,7 +4,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "pxfs/freebsd-10.1"
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.network "private_network", ip: "1.0.0.2"
-  config.ssh.shell = "tcsh"
+  config.ssh.shell = "sh"
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "1024"]
