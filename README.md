@@ -5,7 +5,7 @@ This repository provides a Packer template for building FreeBSD image with ZFS r
 
 ## Usage
 
-This repository is built with Atlas. The resulting image will be pushed to [pxfs/freebsd-10.2](https://vagrantcloud.com/pxfs/boxes/freebsd-10.2) automatically. You can init Vagrant environment with the image built from this repository with:
+The resulting image is currently published at [pxfs/freebsd-10.2](https://vagrantcloud.com/pxfs/boxes/freebsd-10.2). You can init Vagrant environment with the image built from this repository with:
 
 ```shell
 $ vagrant init pxfs/freebsd-10.2
