@@ -11,9 +11,9 @@
       "disk_size": 20480,
       "guest_os_type": "FreeBSD_64",
       "guest_additions_mode": "disable",
-      "iso_checksum": "5f2a4a83c6a75d493fd877f0f15811f85c566c87f4e86c9087935efa43f2019f",
+      "iso_checksum": "3f22bae713ca5c8fe924ed57365d0ea214186af09f5d50282bdb0fff37eee6c9",
       "iso_checksum_type": "sha256",
-      "iso_url": "http://mfsbsd.vx.sk/files/iso/10/amd64/mfsbsd-se-10.2-RELEASE-amd64.iso",
+      "iso_url": "http://mfsbsd.vx.sk/files/iso/10/amd64/mfsbsd-se-10.3-RELEASE-amd64.iso",
       "shutdown_command": "poweroff; poweroff",
       "ssh_password": "mfsroot",
       "ssh_username": "root",
@@ -29,9 +29,9 @@
       "boot_wait": "30s",
       "disk_size": 20480,
       "guest_os_type": "freebsd-64",
-      "iso_checksum": "5f2a4a83c6a75d493fd877f0f15811f85c566c87f4e86c9087935efa43f2019f",
+      "iso_checksum": "3f22bae713ca5c8fe924ed57365d0ea214186af09f5d50282bdb0fff37eee6c9",
       "iso_checksum_type": "sha256",
-      "iso_url": "http://mfsbsd.vx.sk/files/iso/10/amd64/mfsbsd-se-10.2-RELEASE-amd64.iso",
+      "iso_url": "http://mfsbsd.vx.sk/files/iso/10/amd64/mfsbsd-se-10.3-RELEASE-amd64.iso",
       "shutdown_command": "poweroff; poweroff",
       "skip_compaction": true,
       "ssh_password": "mfsroot",
@@ -57,7 +57,7 @@
   "post-processors": [
     [
       {
-        "output": "freebsd-10.2-{{.Provider}}.box",
+        "output": "freebsd-10.3-{{.Provider}}.box",
         "type": "vagrant",
         "keep_input_artifact": false,
         "override": {
@@ -72,7 +72,7 @@
       {
         "type": "atlas",
         "only": ["vmware-iso"],
-        "artifact": "pxfs/freebsd-10.2",
+        "artifact": "pxfs/freebsd-10.3",
         "artifact_type": "vagrant.box",
         "metadata": {
           "provider": "vmware_desktop",
@@ -82,7 +82,7 @@
       {
         "type": "atlas",
         "only": ["virtualbox-iso"],
-        "artifact": "pxfs/freebsd-10.2",
+        "artifact": "pxfs/freebsd-10.3",
         "artifact_type": "vagrant.box",
         "metadata": {
           "provider": "virtualbox",
