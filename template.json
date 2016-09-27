@@ -55,40 +55,18 @@
     }
   ],
   "post-processors": [
-    [
-      {
-        "output": "freebsd-10.1-{{.Provider}}.box",
-        "type": "vagrant",
-        "keep_input_artifact": false,
-        "override": {
-          "vmware": {
-            "vagrantfile_template": "files/Vagrantfile.vmware"
-          },
-          "virtualbox": {
-            "vagrantfile_template": "files/Vagrantfile.virtualbox"
-          }
-        }
-      },
-      {
-        "type": "atlas",
-        "only": ["vmware-iso"],
-        "artifact": "pxfs/freebsd-10.1",
-        "artifact_type": "vagrant.box",
-        "metadata": {
-          "provider": "vmware_desktop",
-          "version": "0.0.3"
-        }
-      },
-      {
-        "type": "atlas",
-        "only": ["virtualbox-iso"],
-        "artifact": "pxfs/freebsd-10.1",
-        "artifact_type": "vagrant.box",
-        "metadata": {
-          "provider": "virtualbox",
-          "version": "0.0.3"
+    {
+      "output": "freebsd-10.1-{{.Provider}}.box",
+      "type": "vagrant",
+      "keep_input_artifact": false,
+      "override": {
+        "vmware": {
+          "vagrantfile_template": "files/Vagrantfile.vmware"
+        },
+        "virtualbox": {
+          "vagrantfile_template": "files/Vagrantfile.virtualbox"
         }
       }
-    ]
+    }
   ]
 }
