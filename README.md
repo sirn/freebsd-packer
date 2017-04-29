@@ -5,17 +5,17 @@ This repository provides a Packer template for building FreeBSD image with ZFS r
 
 ## Usage
 
-The resulting image is currently published at [pxfs/freebsd-10.3](https://vagrantcloud.com/pxfs/boxes/freebsd-10.3). You can init Vagrant environment with the image built from this repository with:
+The resulting image is currently published at [pxfs/freebsd-11.0](https://vagrantcloud.com/pxfs/boxes/freebsd-11.0). You can init Vagrant environment with the image built from this repository with:
 
 ```shell
-$ vagrant init pxfs/freebsd-10.3
+$ vagrant init pxfs/freebsd-11.0
 ```
 
 Or configure manually,
 
 ```ruby
 Vagrant.configure("2") do |config|
-  config.vm.box = "pxfs/freebsd-10.3"
+  config.vm.box = "pxfs/freebsd-11.0"
   # Other configuration.
 end
 ```
@@ -30,6 +30,6 @@ end
 ### Building
 
 1. Build the Vagrant box with `packer build template.json`.
-2. Add the Vagrant box with `vagrant box add --name freebsd-10.3 freebsd-10.3-vmware.box`.
+2. Add the Vagrant box with `vagrant box add --name freebsd-11.0 freebsd-11.0-vmware.box`.
 
 The default Vagrantfile comes with NFS mount on `/vagrant` and 1GB of RAM with 20GB of disk.
