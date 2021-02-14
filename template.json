@@ -1,8 +1,4 @@
 {
-  "push": {
-    "name": "pxfs/freebsd",
-    "vcs": true
-  },
   "builders": [
     {
       "type": "virtualbox-iso",
@@ -11,17 +7,14 @@
       "disk_size": 20480,
       "guest_os_type": "FreeBSD_64",
       "guest_additions_mode": "disable",
-      "iso_checksum": "c9507a492d3b73ede54113461c946a3a171db1b3d30926b054536204f6edbc3d",
-      "iso_checksum_type": "sha256",
-      "iso_url": "http://mfsbsd.vx.sk/files/iso/11/amd64/mfsbsd-se-11.1-RELEASE-amd64.iso",
+      "iso_checksum": "sha256:94a3532b16b59a113e75ecdbe8930234877b09070d837287034ccab555744edd",
+      "iso_url": "https://mfsbsd.vx.sk/files/iso/12/amd64/mfsbsd-se-12.2-RELEASE-amd64.iso",
       "shutdown_command": "poweroff; poweroff",
       "ssh_password": "mfsroot",
       "ssh_username": "root",
       "ssh_wait_timeout": "120s",
       "virtualbox_version_file": ".vbox_version",
-      "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--memory", "1024"]
-      ]
+      "vboxmanage": [["modifyvm", "{{.Name}}", "--memory", "1024"]]
     },
     {
       "type": "vmware-iso",
@@ -29,9 +22,8 @@
       "boot_wait": "30s",
       "disk_size": 20480,
       "guest_os_type": "freebsd-64",
-      "iso_checksum": "c9507a492d3b73ede54113461c946a3a171db1b3d30926b054536204f6edbc3d",
-      "iso_checksum_type": "sha256",
-      "iso_url": "http://mfsbsd.vx.sk/files/iso/11/amd64/mfsbsd-se-11.1-RELEASE-amd64.iso",
+      "iso_checksum": "sha256:94a3532b16b59a113e75ecdbe8930234877b09070d837287034ccab555744edd",
+      "iso_url": "https://mfsbsd.vx.sk/files/iso/12/amd64/mfsbsd-se-12.2-RELEASE-amd64.iso",
       "shutdown_command": "poweroff; poweroff",
       "skip_compaction": true,
       "ssh_password": "mfsroot",
@@ -40,6 +32,25 @@
       "vmx_data": {
         "memsize": "1024"
       }
+    },
+    {
+      "type": "qemu",
+      "boot_command": [],
+      "boot_wait": "30s",
+      "disk_size": 20480,
+      "iso_checksum": "sha256:94a3532b16b59a113e75ecdbe8930234877b09070d837287034ccab555744edd",
+      "iso_url": "https://mfsbsd.vx.sk/files/iso/12/amd64/mfsbsd-se-12.2-RELEASE-amd64.iso",
+      "shutdown_command": "poweroff; poweroff",
+      "skip_compaction": true,
+      "ssh_password": "mfsroot",
+      "ssh_username": "root",
+      "ssh_wait_timeout": "120s",
+      "qemuargs": [
+        ["-m", "1024"],
+        ["-display", "none"],
+        ["-machine", "accel=kvm"],
+        ["-cpu", "host"]
+      ]
     }
   ],
   "provisioners": [
@@ -56,7 +67,7 @@
   ],
   "post-processors": [
     {
-      "output": "freebsd-11.1-{{.Provider}}.box",
+      "output": "freebsd-12.2-{{.Provider}}.box",
       "type": "vagrant",
       "keep_input_artifact": false,
       "override": {
@@ -65,6 +76,9 @@
         },
         "virtualbox": {
           "vagrantfile_template": "files/Vagrantfile.virtualbox"
+        },
+        "qemu": {
+          "vagrantfile_template": "files/Vagrantfile.qemu"
         }
       }
     }
