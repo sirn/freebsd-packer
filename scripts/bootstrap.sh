@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FREEBSD_CDROM=/cdrom/12.2-RELEASE-amd64
+FREEBSD_CDROM=/cdrom/13.0-RELEASE-amd64
 
 echo '==> Installing FreeBSD with ZFS root...'
 mount_cd9660 /dev/cd0 /cdrom
